@@ -6,7 +6,8 @@
     :license: MIT, see LICENSE for more details.
 """
 import click
-from flask import Flask
+from flask import Flask, request, redirect, make_response, url_for
+import os
 
 app = Flask(__name__)
 
@@ -21,7 +22,9 @@ def index():
 @app.route('/hi')
 @app.route('/hello')
 def say_hello():
-    return '<h1>Hello, Flask!</h1>'
+    # name = request.args.get('name')
+    # return '', 302, {'Location', 'https://www.baidu.com'}
+    return redirect('https://www.baidu.com')
 
 
 # dynamic route, URL variable default
@@ -31,8 +34,27 @@ def greet(name):
     return '<h1>Hello, %s!</h1>' % name
 
 
+@app.route('/foo')
+def foo():
+    resp = make_response('hello')
+    resp.mimetype = 'text/plain'
+    return resp
+
+
 # custom flask cli command
 @app.cli.command()
 def hello():
     """Just say hello."""
-    click.echo('Hello, Human!')
+    click.echo('Hello, a Human!')
+
+
+@app.route('/set/<name>')
+def set_cook(name):
+    res = make_response(redirect(url_for('index')))
+    res.set_cookie('name',name)
+    return res
+
+
+@app.route('/key')
+def key():
+    return os.getenv('SECRET_KEY')
