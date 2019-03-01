@@ -58,3 +58,4 @@ def set_cook(name):
 @app.route('/key')
 def key():
     return os.getenv('SECRET_KEY')
+

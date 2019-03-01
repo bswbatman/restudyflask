@@ -218,3 +218,9 @@ def redirect_back(default='hello', **kwargs):
         if is_safe_url(target):
             return redirect(target)
     return redirect(url_for(default, **kwargs))
+
+
+
+@app.route('/test')
+def abd():
+    return '<h1>Hello, httssdssdsdsdpsds</h1>'
