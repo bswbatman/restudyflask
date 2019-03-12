@@ -23,8 +23,8 @@ def index():
 @app.route('/hello')
 def say_hello():
     # name = request.args.get('name')
-    # return '', 302, {'Location', 'https://www.baidu.com'}
-    return redirect('https://www.baidu.com')
+    return '', 301, {'Location': 'https://www.baidu.com'}
+    # return redirect('https://www.baidu.com')
 
 
 # dynamic route, URL variable default
@@ -58,4 +58,3 @@ def set_cook(name):
 @app.route('/key')
 def key():
     return os.getenv('SECRET_KEY')
-
